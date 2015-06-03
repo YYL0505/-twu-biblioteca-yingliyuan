@@ -7,12 +7,14 @@ import java.util.Scanner;
 
 public class BibliotecaApp {
     private ArrayList<Book> books = null;
+    private Scanner scanner = null;
 
     public BibliotecaApp() {
+        scanner = new Scanner(System.in);
         books = new ArrayList<Book>();
-        books.add(new Book("Head First Java", "Kathy Sierra", "2008"));
-        books.add(new Book("The Productive Programmer", "Neal Ford", "2009"));
-        books.add(new Book("Refactor", "Martin Fowler", "2010"));
+        books.add(new Book("Head First Java", "Kathy Sierra", "2008", 1));
+        books.add(new Book("The Productive Programmer", "Neal Ford", "2009", 1));
+        books.add(new Book("Refactor", "Martin Fowler", "2010", 1));
 
         System.out.println("Welcome to Biblioteca!");
     }
@@ -25,9 +27,7 @@ public class BibliotecaApp {
 
     }
 
-    private void shoeOptions() {
-        Scanner scanner = new Scanner(System.in);
-
+    public void shoeOptions() {
 
         boolean quit = false;
 
@@ -51,13 +51,30 @@ public class BibliotecaApp {
 
     }
 
-    private void showBooks() {
+    public void showBooks() {
         System.out.println("All the books are listed below:");
-        System.out.println("Order   Name            " + "author      " + "Year of Publish");
+        System.out.println("ID   Name            " + "author      " + "Year of Publish");
 
-        for (int i = 0; i < books.size(); i++) {
+        int i = 0;
+        for (i = 0; i < books.size(); i++) {
             Book book = books.get(i);
-            System.out.println((i + 1) + "    " + book.getName() + "   " + book.getAuthor() + "    " + book.getYearOfPublished());
+
+            if (1 == book.getStatus())
+                System.out.println((i + 1) + "    " + book.getName() + "   " + book.getAuthor() + "    " + book.getYearOfPublished());
+        }
+        System.out.println("You can input the order of the book to check out it.And input " + (i + 1) + " to return the main menu.");
+        checkoutBook();
+    }
+
+    public void checkoutBook() {
+        int order = scanner.nextInt();
+
+        if (order > (books.size() + 1)) {
+            System.out.println("Invalid order!");
+            showBooks();
+        } else if (order <= books.size()) {
+            books.get(order - 1).setStatus(0);
+            showBooks();
         }
     }
 }
