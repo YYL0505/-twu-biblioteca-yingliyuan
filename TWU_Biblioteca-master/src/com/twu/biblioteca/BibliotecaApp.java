@@ -33,14 +33,18 @@ public class BibliotecaApp {
 
         while (!quit) {
             System.out.println("******************1.List all books*******************");
-            System.out.println("******************2.Quit*****************************");
+            System.out.println("******************2.Return books*******************");
+            System.out.println("******************3.Quit*****************************");
             System.out.println("All options are listed here. You can choose one by inputting te number(before option):");
             int index = scanner.nextInt();
             switch (index) {
                 case 1:
-                    showBooks();
+                    showBooks(1);
                     break;
                 case 2:
+                    showBooks(2);
+                    break;
+                case 3:
                     quit = true;
                     break;
                 default:
@@ -51,33 +55,51 @@ public class BibliotecaApp {
 
     }
 
-    public void showBooks() {
+    public void showBooks(int operatorOrder) {
         System.out.println("All the books are listed below:");
-        System.out.println("ID   Name            " + "author      " + "Year of Publish");
+        System.out.println("ID   Name            " + "author      " + "Year of Publish      " + "Count");
 
         int i = 0;
         for (i = 0; i < books.size(); i++) {
             Book book = books.get(i);
 
             if (0 < book.getCount())
-                System.out.println((i + 1) + "    " + book.getName() + "   " + book.getAuthor() + "    " + book.getYearOfPublished());
+                System.out.println((i + 1) + "    " + book.getName() + "   " + book.getAuthor() + "    " + book.getYearOfPublished() + "    " + book.getCount());
         }
-        System.out.println("You can input the order of the book to check out it.And input " + (i + 1) + " to return the main menu.");
-        checkoutBook();
+
+        if (1 == operatorOrder)
+            checkoutBook();
+        else
+            returnBook();
+    }
+
+    private void returnBook() {
+        System.out.println("You can input the order of the book to return it.And input " + (books.size() + 1) + " to return the main menu.");
+        int order = scanner.nextInt();
+
+        if (order > (books.size() + 1)) {
+            System.out.println("That is not a valid book to return.");
+            showBooks(2);
+        } else if (order <= books.size()) {
+            books.get(order - 1).returnBook(1);
+            System.out.println("Thank you for returning the book.");
+            showBooks(2);
+        }
     }
 
     public void checkoutBook() {
+        System.out.println("You can input the order of the book to check out it.And input " + (books.size() + 1) + " to return the main menu.");
         int order = scanner.nextInt();
 
         if (order > (books.size() + 1)) {
             System.out.println("Invalid order!");
-            showBooks();
+            showBooks(1);
         } else if (order <= books.size()) {
             if (books.get(order - 1).checkoutBook(1))
                 System.out.println("Thank you! Enjoy the book.");
             else
                 System.out.println("That book is not available.");
-            showBooks();
+            showBooks(1);
         }
     }
 }
