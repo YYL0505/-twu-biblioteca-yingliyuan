@@ -12,9 +12,9 @@ public class BibliotecaApp {
     public BibliotecaApp() {
         scanner = new Scanner(System.in);
         books = new ArrayList<Book>();
-        books.add(new Book("Head First Java", "Kathy Sierra", "2008", 1));
-        books.add(new Book("The Productive Programmer", "Neal Ford", "2009", 1));
-        books.add(new Book("Refactor", "Martin Fowler", "2010", 1));
+        books.add(new Book("Head First Java", "Kathy Sierra", "2008", 3));
+        books.add(new Book("The Productive Programmer", "Neal Ford", "2009" ,2));
+        books.add(new Book("Refactor", "Martin Fowler", "2010", 2));
 
         System.out.println("Welcome to Biblioteca!");
     }
@@ -59,7 +59,7 @@ public class BibliotecaApp {
         for (i = 0; i < books.size(); i++) {
             Book book = books.get(i);
 
-            if (1 == book.getStatus())
+            if (0 < book.getCount())
                 System.out.println((i + 1) + "    " + book.getName() + "   " + book.getAuthor() + "    " + book.getYearOfPublished());
         }
         System.out.println("You can input the order of the book to check out it.And input " + (i + 1) + " to return the main menu.");
@@ -73,7 +73,10 @@ public class BibliotecaApp {
             System.out.println("Invalid order!");
             showBooks();
         } else if (order <= books.size()) {
-            books.get(order - 1).setStatus(0);
+            if (books.get(order - 1).checkoutBook(1))
+                System.out.println("Thank you! Enjoy the book.");
+            else
+                System.out.println("That book is not available.");
             showBooks();
         }
     }

@@ -7,13 +7,13 @@ public class Book {
     private String name = null;
     private String author = null;
     private String yearOfPublished = null;
-    private int status;
+    private int count;
 
-    public Book(String name, String author, String year, int status) {
+    public Book(String name, String author, String year, int count) {
         this.name = name;
         this.author = author;
         this.yearOfPublished = year;
-        this.status = status;
+        this.count = count;
     }
 
     public String getYearOfPublished() {
@@ -28,11 +28,20 @@ public class Book {
         return name;
     }
 
-    public int getStatus() {
-        return status;
+    public int getCount() {
+        return count;
     }
 
-    public void setStatus(int status) {
-        this.status = status;
+    public void returnBook(int number) {
+        this.count += number;
+    }
+
+    public boolean checkoutBook(int number) {
+        if (count >= number) {
+            this.count -= number;
+            return true;
+        } else {
+            return false;
+        }
     }
 }
