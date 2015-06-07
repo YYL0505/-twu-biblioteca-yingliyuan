@@ -8,6 +8,7 @@ import java.util.Scanner;
 public class BibliotecaApp {
     private ArrayList<Book> books = null;
     private ArrayList<Movie> movies = null;
+    private ArrayList<User> users = null;
     private Scanner scanner = null;
 
     public BibliotecaApp() {
@@ -22,6 +23,11 @@ public class BibliotecaApp {
         movies.add(new Movie("Interstellar", "2014", "Christopher Nolan", "9.1", 2));
         movies.add(new Movie("Big Hero 6", "2014", "Don Hall && Chris Williams", "8.7", 1));
         movies.add(new Movie("Fast & Furious 7", "2015", "James Wan", "8.4", 2));
+
+        users = new ArrayList<User>();
+        users.add(new User("000-0000", "123456", "librarian"));
+        users.add(new User("111-0000", "123456", "customer"));
+        users.add(new User("111-0001", "123456", "customer"));
 
         System.out.println("Welcome to Biblioteca!");
     }
