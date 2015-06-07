@@ -13,4 +13,12 @@ public class User {
         this.password = password;
         this.userType = userType;
     }
+
+    public String getLibraryNumber() {
+        return libraryNumber;
+    }
+
+    public String getPassword() {
+        return password;
+    }
 }

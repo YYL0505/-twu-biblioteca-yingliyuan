@@ -9,6 +9,7 @@ public class BibliotecaApp {
     private ArrayList<Book> books = null;
     private ArrayList<Movie> movies = null;
     private ArrayList<User> users = null;
+    private User logUser = null;
     private Scanner scanner = null;
 
     public BibliotecaApp() {
@@ -28,20 +29,41 @@ public class BibliotecaApp {
         users.add(new User("000-0000", "123456", "librarian"));
         users.add(new User("111-0000", "123456", "customer"));
         users.add(new User("111-0001", "123456", "customer"));
-
-        System.out.println("Welcome to Biblioteca!");
     }
 
     public static void main(String[] args) {
-
         BibliotecaApp app = new BibliotecaApp();
+        app.login();
+    }
 
-        app.showOptions();
+    public void login() {
+        boolean logged = false;
+        while (!logged) {
+            System.out.println("please input your library number:");
+            String libraryNumber = scanner.next();
+            System.out.println("please input your password:");
+            String password = scanner.next();
+            if (userIsValid(libraryNumber, password))
+                logged = true;
+        }
 
+        System.out.println("Welcome to Biblioteca!");
+        showOptions();
+    }
+
+    public boolean userIsValid(String libraryNumber, String password) {
+        for (int i = 0; i < users.size(); i++) {
+            User user = users.get(i);
+
+            if (libraryNumber.equals(user.getLibraryNumber()) && password.equals(user.getPassword())) {
+                logUser = user;
+                return true;
+            }
+        }
+        return false;
     }
 
     public void showOptions() {
-
         boolean quit = false;
 
         while (!quit) {
