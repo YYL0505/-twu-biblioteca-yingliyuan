@@ -7,11 +7,17 @@ public class User {
     private String libraryNumber;
     private String password;
     private String userType;
+    private String name;
+    private String emailAddress;
+    private String phoneNumber;
 
-    public User(String libraryNumber, String password, String userType) {
+    public User(String libraryNumber, String password, String userType, String name, String emailAddress, String phoneNumber) {
         this.libraryNumber = libraryNumber;
         this.password = password;
         this.userType = userType;
+        this.name = name;
+        this.emailAddress = emailAddress;
+        this.phoneNumber = phoneNumber;
     }
 
     public String getLibraryNumber() {

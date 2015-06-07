@@ -26,9 +26,9 @@ public class BibliotecaApp {
         movies.add(new Movie("Fast & Furious 7", "2015", "James Wan", "8.4", 2));
 
         users = new ArrayList<User>();
-        users.add(new User("000-0000", "123456", "librarian"));
-        users.add(new User("111-0000", "123456", "customer"));
-        users.add(new User("111-0001", "123456", "customer"));
+        users.add(new User("000-0000", "123456", "librarian", "librarian1", "453205401@qq.com", "15872375058"));
+        users.add(new User("111-0000", "123456", "customer", "customer1", "453205401@qq.com", "15872375058"));
+        users.add(new User("111-0001", "123456", "customer", "customer2", "453205401@qq.com", "15872375058"));
     }
 
     public static void main(String[] args) {
