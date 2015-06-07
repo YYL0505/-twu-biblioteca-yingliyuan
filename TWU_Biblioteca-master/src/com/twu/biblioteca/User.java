@@ -21,4 +21,8 @@ public class User {
     public String getPassword() {
         return password;
     }
+
+    public String getUserType() {
+        return userType;
+    }
 }

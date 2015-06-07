@@ -47,8 +47,8 @@ public class BibliotecaApp {
                 logged = true;
         }
 
-        System.out.println("Welcome to Biblioteca!");
-        showOptions();
+        System.out.println("Welcome to Biblioteca! " + logUser.getLibraryNumber());
+        showOptions(logUser.getUserType());
     }
 
     public boolean userIsValid(String libraryNumber, String password) {
@@ -63,7 +63,18 @@ public class BibliotecaApp {
         return false;
     }
 
-    public void showOptions() {
+    public void showOptions(String userType) {
+        if ("customer".equals(userType)) {
+            showCustomerOptions();
+        } else {
+            showLibrarianOptions();
+        }
+    }
+
+    public void showLibrarianOptions() {
+    }
+
+    public void showCustomerOptions() {
         boolean quit = false;
 
         while (!quit) {
@@ -91,7 +102,6 @@ public class BibliotecaApp {
                     break;
             }
         }
-
     }
 
     public void showMovies(int operatorOrder) {
