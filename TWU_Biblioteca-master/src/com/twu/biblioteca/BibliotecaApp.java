@@ -19,9 +19,9 @@ public class BibliotecaApp {
         books.add(new Book("Refactor", "Martin Fowler", "2010", 2));
 
         movies = new ArrayList<Movie>();
-        movies.add(new Movie("Interstellar", "2014", "Christopher Nolan", "9.1"));
-        movies.add(new Movie("Big Hero 6", "2014", "Don Hall && Chris Williams", "8.7"));
-        movies.add(new Movie("Fast & Furious 7", "2015", "James Wan", "8.4"));
+        movies.add(new Movie("Interstellar", "2014", "Christopher Nolan", "9.1", 2));
+        movies.add(new Movie("Big Hero 6", "2014", "Don Hall && Chris Williams", "8.7", 1));
+        movies.add(new Movie("Fast & Furious 7", "2015", "James Wan", "8.4", 2));
 
         System.out.println("Welcome to Biblioteca!");
     }
@@ -41,7 +41,8 @@ public class BibliotecaApp {
         while (!quit) {
             System.out.println("******************1.List all books*******************");
             System.out.println("******************2.Return books*******************");
-            System.out.println("******************3.Quit*****************************");
+            System.out.println("******************3.List all movies*******************");
+            System.out.println("******************4.Quit*****************************");
             System.out.println("All options are listed here. You can choose one by inputting te number(before option):");
             int index = scanner.nextInt();
             switch (index) {
@@ -52,6 +53,9 @@ public class BibliotecaApp {
                     showBooks(2);
                     break;
                 case 3:
+                    showMovies(1);
+                    break;
+                case 4:
                     quit = true;
                     break;
                 default:
@@ -60,6 +64,38 @@ public class BibliotecaApp {
             }
         }
 
+    }
+
+    public void showMovies(int operatorOrder) {
+        System.out.println("All the movies are listed below:");
+        System.out.println("ID   Name            " + "Year      " + "Director      " + "Rate");
+
+        int i = 0;
+        for (i = 0; i < movies.size(); i++) {
+            Movie movie = movies.get(i);
+
+            if (0 < movie.getCount())
+                System.out.println((i + 1) + "    " + movie.getName() + "   " + movie.getYear() + "    " + movie.getDirector() + "    " + movie.getRate());
+        }
+
+        if (1 == operatorOrder)
+            checkoutMovie();
+    }
+
+    public void checkoutMovie() {
+        System.out.println("You can input the order of the movie to check out it.And input " + (movies.size() + 1) + " to return the main menu.");
+        int order = scanner.nextInt();
+
+        if (order > (movies.size() + 1)) {
+            System.out.println("Invalid order!");
+            showBooks(1);
+        } else if (order <= movies.size()) {
+            if (movies.get(order - 1).checkoutBook(1))
+                System.out.println("Thank you! Enjoy the movie.");
+            else
+                System.out.println("That movie is not available.");
+            showMovies(1);
+        }
     }
 
     public void showBooks(int operatorOrder) {
