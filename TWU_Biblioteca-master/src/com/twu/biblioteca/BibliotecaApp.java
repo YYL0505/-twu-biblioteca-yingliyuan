@@ -72,6 +72,44 @@ public class BibliotecaApp {
     }
 
     public void showLibrarianOptions() {
+        boolean quit = false;
+        while (!quit) {
+            System.out.println("******************1.List all books that be checked out*******************");
+            System.out.println("******************2.Quit*****************************");
+
+            int index = scanner.nextInt();
+            switch (index) {
+                case 1:
+                    showAllCheckedOutBooks();
+                    break;
+                case 2:
+                    quit = true;
+                    break;
+                default:
+                    System.out.println("Select a valid option!");
+                    break;
+            }
+        }
+    }
+
+    public void showAllCheckedOutBooks() {
+        System.out.println("LibraryNumber    Book Name");
+
+        for (int i = 0; i < users.size(); i++) {
+            User user = users.get(i);
+            ArrayList<Book> checkedOutBooks = null;
+
+            if (user.getUserType().equals("customer")) {
+                checkedOutBooks = user.getCheckoutBooks();
+                showCheckedOutBooks(user.getLibraryNumber(), checkedOutBooks);
+            }
+        }
+    }
+
+    public void showCheckedOutBooks(String libraryNumber, ArrayList<Book> checkedOutBooks) {
+        for (int i = 0; i < checkedOutBooks.size(); i++) {
+            System.out.println(libraryNumber + "    " + checkedOutBooks.get(i).getName());
+        }
     }
 
     public void showCustomerOptions() {
