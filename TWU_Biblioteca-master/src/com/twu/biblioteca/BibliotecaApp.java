@@ -7,14 +7,21 @@ import java.util.Scanner;
 
 public class BibliotecaApp {
     private ArrayList<Book> books = null;
+    private ArrayList<Movie> movies = null;
     private Scanner scanner = null;
 
     public BibliotecaApp() {
         scanner = new Scanner(System.in);
+
         books = new ArrayList<Book>();
         books.add(new Book("Head First Java", "Kathy Sierra", "2008", 3));
         books.add(new Book("The Productive Programmer", "Neal Ford", "2009" ,2));
         books.add(new Book("Refactor", "Martin Fowler", "2010", 2));
+
+        movies = new ArrayList<Movie>();
+        movies.add(new Movie("Interstellar", "2014", "Christopher Nolan", "9.1"));
+        movies.add(new Movie("Big Hero 6", "2014", "Don Hall && Chris Williams", "8.7"));
+        movies.add(new Movie("Fast & Furious 7", "2015", "James Wan", "8.4"));
 
         System.out.println("Welcome to Biblioteca!");
     }
