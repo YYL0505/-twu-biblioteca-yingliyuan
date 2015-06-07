@@ -23,11 +23,11 @@ public class BibliotecaApp {
 
         BibliotecaApp app = new BibliotecaApp();
 
-        app.shoeOptions();
+        app.showOptions();
 
     }
 
-    public void shoeOptions() {
+    public void showOptions() {
 
         boolean quit = false;
 
