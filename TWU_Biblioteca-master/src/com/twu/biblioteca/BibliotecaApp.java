@@ -16,9 +16,9 @@ public class BibliotecaApp {
         scanner = new Scanner(System.in);
 
         books = new ArrayList<Book>();
-        books.add(new Book("Head First Java", "Kathy Sierra", "2008", 3));
-        books.add(new Book("The Productive Programmer", "Neal Ford", "2009" ,2));
-        books.add(new Book("Refactor", "Martin Fowler", "2010", 2));
+        books.add(new Book("Head First Java", "Kathy Sierra", "2008", 1));
+        books.add(new Book("The Productive Programmer", "Neal Ford", "2009" , 1));
+        books.add(new Book("Refactor", "Martin Fowler", "2010", 1));
 
         movies = new ArrayList<Movie>();
         movies.add(new Movie("Interstellar", "2014", "Christopher Nolan", "9.1", 2));
@@ -166,16 +166,23 @@ public class BibliotecaApp {
     }
 
     private void returnBook() {
-        System.out.println("You can input the order of the book to return it.And input " + (books.size() + 1) + " to return the main menu.");
-        int order = scanner.nextInt();
+        ArrayList<Book> checkoutBooks = logUser.getCheckoutBooks();
 
-        if (order > (books.size() + 1)) {
-            System.out.println("That is not a valid book to return.");
-            showBooks(2);
-        } else if (order <= books.size()) {
-            books.get(order - 1).returnBook(1);
-            System.out.println("Thank you for returning the book.");
-            showBooks(2);
+        if (null == checkoutBooks) {
+            System.out.println("there is no book that you have checkouted.");
+        } else {
+            System.out.println("You can input the order of the book to return it.And input " + (checkoutBooks.size() + 1) + " to return the main menu.");
+            int order = scanner.nextInt();
+
+            if (order > (checkoutBooks.size() + 1)) {
+                System.out.println("That is not a valid book to return.");
+                showBooks(2);
+            } else if (order <= checkoutBooks.size()) {
+                checkoutBooks.get(order - 1).returnBook(1);
+                logUser.removeCheckoutBook(checkoutBooks.get(order - 1));
+                System.out.println("Thank you for returning the book.");
+                showBooks(2);
+            }
         }
     }
 
@@ -187,8 +194,10 @@ public class BibliotecaApp {
             System.out.println("Invalid order!");
             showBooks(1);
         } else if (order <= books.size()) {
-            if (books.get(order - 1).checkoutBook(1))
+            if (books.get(order - 1).checkoutBook(1)) {
+                logUser.addCheckoutBook(books.get(order - 1));
                 System.out.println("Thank you! Enjoy the book.");
+            }
             else
                 System.out.println("That book is not available.");
             showBooks(1);
