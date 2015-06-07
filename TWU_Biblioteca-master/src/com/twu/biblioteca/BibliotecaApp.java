@@ -79,9 +79,10 @@ public class BibliotecaApp {
 
         while (!quit) {
             System.out.println("******************1.List all books*******************");
-            System.out.println("******************2.Return books*******************");
-            System.out.println("******************3.List all movies*******************");
-            System.out.println("******************4.Quit*****************************");
+            System.out.println("******************2.Return books*********************");
+            System.out.println("******************3.List all movies******************");
+            System.out.println("******************4.Display my information***********");
+            System.out.println("******************5.Quit*****************************");
             System.out.println("All options are listed here. You can choose one by inputting te number(before option):");
             int index = scanner.nextInt();
             switch (index) {
@@ -95,6 +96,9 @@ public class BibliotecaApp {
                     showMovies(1);
                     break;
                 case 4:
+                    showUserInformation();
+                    break;
+                case 5:
                     quit = true;
                     break;
                 default:
@@ -102,6 +106,13 @@ public class BibliotecaApp {
                     break;
             }
         }
+    }
+
+    public void showUserInformation() {
+        System.out.println("YOUR INFORMATION:");
+        System.out.println("Name: " + logUser.getName());
+        System.out.println("Email Address: " + logUser.getEmailAddress());
+        System.out.println("Phone Number: " + logUser.getPhoneNumber());
     }
 
     public void showMovies(int operatorOrder) {

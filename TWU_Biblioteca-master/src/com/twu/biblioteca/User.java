@@ -31,4 +31,16 @@ public class User {
     public String getUserType() {
         return userType;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getEmailAddress() {
+        return emailAddress;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
 }
